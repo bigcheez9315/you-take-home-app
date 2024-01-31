@@ -1,0 +1,29 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: you-take-home-app
+  labels: 
+     app: you-app
+
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: you-app
+
+  template:
+    metadata:
+      labels:
+        app: you-app
+    spec:
+      containers:
+      - name: you-app
+        image: 200495214320.dkr.ecr.us-east-2.amazonaws.com/you-app
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
