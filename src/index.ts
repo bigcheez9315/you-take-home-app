@@ -7,7 +7,7 @@ const app = express();
 const port = 8080;
 
 app.get('/', (req, res) => {
-  res.send('Express + TypeScript Server');
+  res.send('You take-home app welcome page!');
 });
 
 app.listen(port, () => {
