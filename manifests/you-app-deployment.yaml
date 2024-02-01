@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: you-app
-        image: 200495214320.dkr.ecr.us-east-2.amazonaws.com/you-app:ad4fbc7
+        image: 200495214320.dkr.ecr.us-east-2.amazonaws.com/you-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
