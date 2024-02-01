@@ -7,7 +7,7 @@ on:
 
 env:
   ECR_REPOSITORY: you-app
-  EKS_CLUSTER_NAME: you-take-home-project-cluster
+  EKS_CLUSTER_NAME: you-image-app
   AWS_REGION: us-east-2
 
 jobs:
