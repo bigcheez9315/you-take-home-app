@@ -6,7 +6,7 @@ WORKDIR /opt/app
 COPY ./package.json ./package-lock.json ./
 RUN npm install
 COPY src/ ./
-EXPOSE 5000
+EXPOSE 8080
 # Transpile typescript to javascript and start app
 CMD [ "npm", "start"]
 # FROM python:3.8-slim-buster
