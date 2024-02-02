@@ -7,7 +7,7 @@ COPY ./package.json ./package-lock.json ./
 RUN npm install
 COPY src/ ./
 EXPOSE 8080
-RUN npm run build
+RUN npx tsc
 
 # Transpile typescript to javascript and start app
 CMD [ "npm", "start"]
