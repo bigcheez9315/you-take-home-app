@@ -4,10 +4,9 @@ FROM node:18.16.0-alpine3.17
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY ./package.json ./package-lock.json ./
-RUN npm install\
-    && npm install typescript -g
+RUN npm install
 COPY src/ ./
-RUN npx tsc
+RUN npm run build
 
 EXPOSE 8080
 # Transpile typescript to javascript and start app
