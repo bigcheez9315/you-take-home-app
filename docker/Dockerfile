@@ -7,6 +7,8 @@ COPY ./package.json ./package-lock.json ./
 RUN npm install
 COPY src/ ./
 EXPOSE 8080
+RUN npm run build
+
 # Transpile typescript to javascript and start app
 CMD [ "npm", "start"]
 # FROM python:3.8-slim-buster
