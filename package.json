@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "start": "nodemon src/index.ts"
+    "start": "ts-node src/index.ts"
   },
   "author": "Avi Steinberg",
   "license": "ISC",
