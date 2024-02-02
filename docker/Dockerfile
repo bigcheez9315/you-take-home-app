@@ -6,10 +6,11 @@ WORKDIR /opt/app
 COPY ./package.json ./package-lock.json ./
 RUN npm install
 COPY src/ ./
-EXPOSE 8080
+RUN npm run build
 
+EXPOSE 8080
 # Transpile typescript to javascript and start app
-CMD [ "npm", "start"]
+CMD [ "node", "dist/index.js"]
 # FROM python:3.8-slim-buster
 
 # WORKDIR /python-docker
