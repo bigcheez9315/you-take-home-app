@@ -1,16 +1,16 @@
 #syntax=docker/dockerfile:1
 
-FROM node:alpine
+FROM node:18-alpine
 RUN mkdir -p /opt/app
 WORKDIR /opt/app
 COPY ./package.json ./package-lock.json ./
 RUN npm install
 COPY src/ ./
-RUN tsc
+RUN npm run build
 
 EXPOSE 8080
 # Transpile typescript to javascript and start app
-CMD [ "node", "dist/index.js"]
+CMD [ "npm", "start"]
 # FROM python:3.8-slim-buster
 
 # WORKDIR /python-docker
