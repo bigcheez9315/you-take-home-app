@@ -25,4 +25,16 @@ Bonus points:
 ## Your instructions:
 Below, include instructions on how to run your code, build  and how to send requests to your API.
 
+To run the api locally, perform the following steps:
+1. Run ```npm i``` to install node_modules
+2. Run `npm run start:dev` that should start a local express server on port http://localhost:8080
+3. Test that api works locally by using curl, such as `curl http://localhost:8080/image/0` 
+
+To deploy new versions of the api, merge changes to `master` branch and push to origin. This will trigger the github action ci-cd pipeline. 
+
+The ci-cd pipeline deploys the api to the following url: `https://avi-testing-api.com`
+
+You can test out the deployed api with curl using some of the following example commands:
+- `curl https://avi-testing-api.com/images?filter=titles` to get the base64 url encoded images that have unique titles
+- `https://avi-testing-api.com/images` to get all base64 encoded images (there will be duplicates)
 ...
