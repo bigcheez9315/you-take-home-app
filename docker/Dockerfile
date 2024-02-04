@@ -10,7 +10,7 @@ RUN npm install
 COPY src/ ./
 RUN npm run build
 
-EXPOSE 3000
+EXPOSE 8080
 # Transpile typescript to javascript and start app
 CMD [ "npm", "start"]
 # FROM python:3.8-slim-buster

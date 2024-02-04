@@ -21,7 +21,7 @@ spec:
         image: 200495214320.dkr.ecr.us-east-2.amazonaws.com/you-app:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
 
   strategy:
     type: RollingUpdate
