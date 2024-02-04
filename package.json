@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc -p .",
-    "start": "NODE_PATH=./dist node dist/index.js"
+    "start": "NODE_PATH=./dist node dist/index.js",
+    "start:dev": "nodemon src/index.ts"
   },
   "author": "Avi Steinberg",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
+    "axios": "^1.6.7",
     "express": "^4.18.2",
     "typescript": "^5.3.3"
   }
