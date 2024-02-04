@@ -1,4 +1,4 @@
-import { base64Encode, downloadImage, getAllImagesEncoded, getFilteredImage, getImageData } from "./image-api-helpers";
+import { base64Encode, downloadImage, getAllImagesEncoded, getFilteredImage, getFilteredImagesEncoded, getImageData } from "./image-api-helpers";
 
 const express = require('express');
 // const dotenv = require('dotenv');
@@ -35,7 +35,7 @@ app.get('/image/:image_index', async (req, res) => {
   // base64 encode image file
   console.log('finished downloading image. Now going to base64 encode file')
   const imageAsBase64 = base64Encode(imagePath)
-  console.log(`base64 encoded image = ${imageAsBase64}`)
+  // console.log(`base64 encoded image = ${imageAsBase64}`)
   // return base64 encoded image file
   res.send(imageAsBase64)
   // download the image from its URL and return it base64 encoded.
@@ -50,6 +50,12 @@ app.get('/images', async (req, res) => {
     responseData = await getAllImagesEncoded()
   } else {
     //  Use filter query param to filter by an image property to remove any duplicates.
+    responseData = await getFilteredImagesEncoded(filterQueryparam)
+    if (responseData === null) {
+      // res.statusMessage = "Filter query param is invalid because it is not a valid image property";
+      res.status(400).json({ message: 'Filter query param is invalid because it is not a valid image property' });
+      return
+    }
     //  If the property doesn't exist, you should return the proper HTTP status code
   }
   res.send(JSON.stringify(responseData))

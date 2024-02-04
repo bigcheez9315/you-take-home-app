@@ -1,5 +1,6 @@
 import axios from "axios";
 import fs from 'fs'
+
 const IMAGE_API_BASE_URL = 'https://youdotcom-interview-api.azurewebsites.net/api/HttpAPI';
 
 // Function to get image data
@@ -43,9 +44,14 @@ export const base64Encode = (file) =>  {
 export const getAllImagesEncoded = async () => {
     // get all images
     const imageData = await getImageData();
+    const encodedImages = await getEncodedImages(imageData)
+    return encodedImages
+}
+
+const getEncodedImages = async (imageData) => {
     let encodedImages = []
     const imageFilePath = 'latestDownload.png'
-    // iterate through each image 
+
     for (const image of imageData) {
         // parse out url
         const { url } = image;
@@ -57,4 +63,33 @@ export const getAllImagesEncoded = async () => {
         encodedImages.push(imageAsBase64)
     }
     return encodedImages
+}
+// function to filter images by image property and remove duplicates
+export const getFilteredImagesEncoded = async (filterProperty: string) => {
+    // get all images
+    const imageData = await getImageData();
+    console.log(`initial image length=${imageData.length}`)
+    // get unique keys of image object
+    const validProperties = new Set(Object.keys(imageData[0]))
+    // check if filterProperty is one of the unique keys
+    // if not then return null
+    if (!validProperties.has(filterProperty)) {
+        return null
+    } else {
+        // if so, then remove duplicates that exist in filterProperty
+        const filteredData = removeDuplicates(imageData, filterProperty );
+        console.log(`filtered image data = ${JSON.stringify(filteredData)}`)
+        console.log(`filtered image length=${filteredData.length}`)
+
+        // download and encode the images
+        const encodedImages = await getEncodedImages(filteredData)
+        return encodedImages
+    }
+
+
+}
+function removeDuplicates(myArr, prop) {
+    return myArr.filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos
+    })
 }
