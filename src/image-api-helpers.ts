@@ -34,7 +34,27 @@ export const downloadImage = (url: string, imagePath: string) =>
       }),
   );
 
-  export const base64Encode = (file) =>  {
+export const base64Encode = (file) =>  {
     // read binary data
     return  fs.readFileSync(file, { encoding: 'base64' });;
+}
+
+// function to base64 encode all images from image api
+export const getAllImagesEncoded = async () => {
+    // get all images
+    const imageData = await getImageData();
+    let encodedImages = []
+    const imageFilePath = 'latestDownload.png'
+    // iterate through each image 
+    for (const image of imageData) {
+        // parse out url
+        const { url } = image;
+        // download image
+        await downloadImage(url, imageFilePath)
+        // base64 encode image
+        const imageAsBase64 = base64Encode(imageFilePath)
+        // add base64 encoded image to array
+        encodedImages.push(imageAsBase64)
+    }
+    return encodedImages
 }

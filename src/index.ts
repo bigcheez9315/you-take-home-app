@@ -1,4 +1,4 @@
-import { base64Encode, downloadImage, getFilteredImage, getImageData } from "./image-api-helpers";
+import { base64Encode, downloadImage, getAllImagesEncoded, getFilteredImage, getImageData } from "./image-api-helpers";
 
 const express = require('express');
 // const dotenv = require('dotenv');
@@ -43,14 +43,17 @@ app.get('/image/:image_index', async (req, res) => {
 app.get('/images', async (req, res) => {
   // check if filter query param is passed in
   const filterQueryparam = req.query.filter;
+  let responseData
   if (!filterQueryparam) {
     // if not then return all images base64 encoded
-    console.log("Return all images base64 encoded");
+    console.log("Download all images and convert to base64");
+    responseData = await getAllImagesEncoded()
   } else {
     //  Use filter query param to filter by an image property to remove any duplicates.
     //  If the property doesn't exist, you should return the proper HTTP status code
   }
-  
+  res.send(JSON.stringify(responseData))
+
 })
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
